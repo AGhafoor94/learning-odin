@@ -7,4 +7,6 @@ main :: proc() {
 	x := 100
 	learning_pointers(&x)
 	fmt.println(x)
+
+	learning_arrays()
 }
