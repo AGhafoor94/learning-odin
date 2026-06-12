@@ -9,17 +9,15 @@ iterators :: proc() {
 }
 learning_arrays :: proc() {
 	test_array := [dynamic]int{}
-	// x := make([dynamic]int, 0, 10)
+	x := make([dynamic]int, 0, 15)
 
-	for i in 0 ..< 10 do append(&test_array, i)
+	// for i in 0 ..< 10 do append(&test_array, i)
 
-	for value, index in test_array do fmt.println(value, " ", index)
 
-	// remove last item
-	pop(&test_array)
-	for value, index in test_array do fmt.println(value, " ", index)
-	learning_pointers_for_arrays(&test_array)
+	learning_pointers_for_arrays(&test_array, 10)
 	fmt.println(test_array)
+	learning_pointers_for_arrays(&x, 15)
+	fmt.println(x)
 }
 learning_pointers :: proc(index: ^int) {
 	// i := 100
@@ -30,6 +28,12 @@ learning_pointers :: proc(index: ^int) {
 	index^ = 200
 	// fmt.println(index^)
 }
-learning_pointers_for_arrays :: proc(array: ^[dynamic]int) {
+learning_pointers_for_arrays :: proc(array: ^[dynamic]int, length: int) {
+	for i in 0 ..< length do append(&array^, i)
+	fmt.println(array^)
 	append(&array^, 200)
+	// for value, index in array^ do fmt.println(value, " ", index)
+
+	fmt.println(array^)
+	pop(&array^)
 }
