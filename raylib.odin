@@ -1,5 +1,6 @@
 package main
 
+import "core:c"
 import "core:fmt"
 import raylib "vendor:raylib"
 
@@ -18,15 +19,17 @@ raylib_window :: proc() {
 
 	raylib.SetTargetFPS(60)
 
-	raylib.BeginDrawing()
-	raylib.ClearBackground(raylib.RAYWHITE)
-	raylib.DrawText("TEST 123", 0, 0, 12, raylib.BLACK)
-	raylib.DrawTextureRec(
-		texture = app_state.raylib_texture.texture,
-		source = {0, 0, f32(app_state.screen_width), -f32(app_state.screen_height)},
-		position = {0, 0},
-		tint = raylib.WHITE,
-	)
-	raylib.EndDrawing()
-
+	for !raylib.WindowShouldClose() {
+		free_all(context.temp_allocator)
+		raylib.BeginDrawing()
+		raylib.ClearBackground(raylib.RAYWHITE)
+		raylib.DrawText("TEST 123", 0, 0, 15, raylib.BLACK)
+		raylib.DrawTextureRec(
+			texture = app_state.raylib_texture.texture,
+			source = {0, 0, f32(app_state.screen_width), -f32(app_state.screen_height)},
+			position = {0, 0},
+			tint = raylib.WHITE,
+		)
+		raylib.EndDrawing()
+	}
 }
